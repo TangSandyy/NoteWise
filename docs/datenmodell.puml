@@ -1,0 +1,80 @@
+@startuml datenmodell
+!pragma layout smetana
+title NoteWise – Datenmodell (Entwurf)
+
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #D5E8D4
+  BorderColor #82B366
+  BackgroundColor<<Zusatzziel>> #F5F5F5
+  BorderColor<<Zusatzziel>> #999999
+  FontColor<<Zusatzziel>> #666666
+}
+hide circle
+hide methods
+
+class User <<Entity>> {
+  - id: Long
+  - username: String
+  - passwordHash: String
+}
+
+class Course <<Entity>> {
+  - id: Long
+  - name: String
+}
+
+class StudyDocument <<Entity>> {
+  - id: Long
+  - fileName: String
+  - storagePath: String
+  - content: String
+  - uploadedAt: LocalDateTime
+}
+
+class Summary <<Entity>> {
+  - id: Long
+  - content: String
+}
+
+class Flashcard <<Entity>> {
+  - id: Long
+  - question: String
+  - answer: String
+  - createdAt: LocalDateTime
+}
+
+class ExamQuestion <<Zusatzziel>> {
+  - id: Long
+  - statement: String
+  - isTrue: Boolean
+}
+
+class Exam <<Zusatzziel>> {
+  - id: Long
+  - examDate: LocalDate
+}
+
+class FlashcardReview <<Zusatzziel>> {
+  - id: Long
+  - correct: Boolean
+  - reviewedAt: LocalDateTime
+}
+
+User "1" -- "0..*" Course
+Course "1" *-- "0..*" StudyDocument
+StudyDocument "1" *-- "0..*" Summary
+StudyDocument "1" *-- "0..*" Flashcard
+StudyDocument "1" *.. "0..*" ExamQuestion
+Course "1" *.. "0..1" Exam
+Flashcard "1" *.. "0..*" FlashcardReview
+
+note as Erweiterungen
+  Graue Klassen sind Zusatzziele:
+  - ExamQuestion: Prüfungsfragen (Wahr/Falsch)
+  - FlashcardReview: Lernfortschritt, speichert beim Lernen einer Karteikarte,
+    ob sie richtig/falsch beantwortet wurde
+  - Exam: Kalender mit Tagen bis zur Klausur
+end note
+
+@enduml

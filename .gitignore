@@ -1,0 +1,28 @@
+### Allgemein ###
+.DS_Store
+.env
+.env.*
+!.env.example
+
+### IntelliJ / VS Code ###
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+
+### Backend (Spring Boot / Maven) ###
+backend/target/
+backend/HELP.md
+backend/.mvn/wrapper/maven-wrapper.jar
+backend/uploads/
+
+### Frontend (Nuxt) ###
+frontend/node_modules/
+frontend/.nuxt/
+frontend/.output/
+frontend/.data/
+frontend/dist/
+frontend/.cache/
+frontend/logs/
+*.log
