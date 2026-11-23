@@ -1,1 +1,18 @@
-services: { }
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    container_name: notewise-db
+    environment:
+      POSTGRES_DB: notewise
+      POSTGRES_USER: notewise
+      POSTGRES_PASSWORD: notewise
+    ports:
+      - "5432:5432"
+    volumes:
+      - notewise-db-data:/var/lib/postgresql/data
+    labels:
+      # damit Spring Boot das pgvector-Image als PostgreSQL erkennt
+      org.springframework.boot.service-connection: postgres
+
+volumes:
+  notewise-db-data:
