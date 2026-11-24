@@ -1,6 +1,7 @@
+nah 
 # NoteWise – Frontend
 
-Hier kommt das Nuxt-Projekt (TypeScript, Nuxt UI, Pinia) hin.
+Hier kommt das Nuxt-Projekt hin.
 
 Anlegen direkt in diesem Ordner, z. B.:
 

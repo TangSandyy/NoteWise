@@ -15,18 +15,26 @@ NoteWise/
 
 ## Backend starten
 
-Voraussetzungen: Java 17+ und Docker Desktop (muss laufen)
+**Voraussetzungen**
+- Java 17 oder neuer
+- Docker Desktop installiert und gestartet
+
+**Starten**
 
 ```bash
 cd backend
 ./mvnw spring-boot:run
 ```
 
-Die PostgreSQL-Datenbank startet dabei automatisch über Docker Compose. Beim ersten Start werden Testdaten angelegt.
+Die PostgreSQL-Datenbank startet dabei automatisch über Docker Compose (Container `notewise-db`) und läuft nach dem Stoppen der App weiter. Beim ersten Start werden Testdaten angelegt.
 
-In IntelliJ den Ordner `NoteWise` öffnen und `backend/pom.xml` als Maven-Projekt laden.
+**In IntelliJ**
+1. Den Ordner `NoteWise` öffnen und `backend/pom.xml` als Maven-Projekt laden („Load Maven Project“).
+2. `NoteWiseApplication` starten. Falls der Fehler „No Docker Compose file found“ kommt: Run → Edit Configurations → **Working directory** auf den Ordner `backend` setzen.
 
-**OpenAI-API-Key:** `backend/.env.example` nach `backend/.env` kopieren und den Key eintragen. Die `.env` wird nicht gepusht.
+**OpenAI-API-Key**
+
+`backend/.env.example` nach `backend/.env` kopieren und den Key eintragen. Die `.env` wird nicht gepusht. Ohne Key startet die App trotzdem, nur die KI-Aufrufe funktionieren nicht.
 
 ## API testen
 
