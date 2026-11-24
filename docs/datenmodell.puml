@@ -16,7 +16,6 @@ hide methods
 class User <<Entity>> {
   - id: Long
   - username: String
-  - passwordHash: String
 }
 
 class Course <<Entity>> {
