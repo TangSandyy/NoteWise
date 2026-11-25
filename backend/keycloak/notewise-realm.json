@@ -32,10 +32,10 @@
   ],
   "users": [
     {
-      "username": "testuser",
-      "email": "testuser@notewise.local",
-      "firstName": "Test",
-      "lastName": "User",
+      "username": "sandy",
+      "email": "sandy@notewise.local",
+      "firstName": "Sandy",
+      "lastName": "Tang",
       "enabled": true,
       "emailVerified": true,
       "credentials": [
@@ -50,10 +50,46 @@
       ]
     },
     {
-      "username": "testuser2",
-      "email": "testuser2@notewise.local",
-      "firstName": "Test",
-      "lastName": "User Zwei",
+      "username": "firdes",
+      "email": "firdes@notewise.local",
+      "firstName": "Firdes",
+      "lastName": "Kiraci",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "test",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "default-roles-notewise"
+      ]
+    },
+    {
+      "username": "selina",
+      "email": "selina@notewise.local",
+      "firstName": "Selina",
+      "lastName": "Kopf",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "test",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "default-roles-notewise"
+      ]
+    },
+    {
+      "username": "elisabeth",
+      "email": "elisabeth@notewise.local",
+      "firstName": "Elisabeth",
+      "lastName": "Heumel",
       "enabled": true,
       "emailVerified": true,
       "credentials": [
