@@ -11,8 +11,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-// Legt beim Start Testdaten an, solange es noch keinen Login und Upload gibt.
-// Läuft nur, wenn die Tabellen noch leer sind, damit nichts doppelt angelegt wird.
+// Legt beim Start Testdaten für das Team an.
+// Läuft nur, wenn es noch keine Kurse gibt, damit nichts doppelt angelegt wird.
 @Component
 public class DataInitializer implements CommandLineRunner {
 
@@ -27,15 +27,17 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) {
-        User user = getOrCreateUser("testuser");
-        User secondUser = getOrCreateUser("testuser2");
+        User sandy = getOrCreateUser("sandy");
+        User firdes = getOrCreateUser("firdes");
+        User selina = getOrCreateUser("selina");
+        User elisabeth = getOrCreateUser("elisabeth");
 
         if (courseRepository.count() > 0) {
             return;
         }
 
-        // --- Kurs 1: Data Warehousing ---
-        Course dwh = createCourse(user, "Data Warehousing");
+        // --- Sandy: Data Warehousing ---
+        Course dwh = createCourse(sandy, "Data Warehousing");
 
         StudyDocument dwhVo1 = createDocument(dwh, "DWH_VO01_Einfuehrung.pdf",
                 "Ein Data Warehouse ist eine zentrale Datenbank, die Daten aus verschiedenen Quellsystemen "
@@ -57,8 +59,8 @@ public class DataInitializer implements CommandLineRunner {
         createFlashcard(dwhVo2, "Woraus besteht ein Sternschema?",
                 "Aus einer zentralen Faktentabelle mit Kennzahlen und mehreren Dimensionstabellen mit beschreibenden Attributen.");
 
-        // --- Kurs 2: Service Engineering ---
-        Course se = createCourse(user, "Service Engineering");
+        // --- Sandy: Service Engineering ---
+        Course se = createCourse(sandy, "Service Engineering");
 
         StudyDocument seVo1 = createDocument(se, "SE_VO01_REST.pdf",
                 "REST ist ein Architekturstil für verteilte Systeme. Ressourcen werden über URLs adressiert "
@@ -70,8 +72,8 @@ public class DataInitializer implements CommandLineRunner {
                 "Der Server speichert keinen Zustand zwischen Anfragen, jede Anfrage enthält alle nötigen Informationen.");
         createFlashcard(seVo1, "Welche HTTP-Methode wird zum Anlegen einer Ressource verwendet?", "POST");
 
-        // --- Kurs von testuser2: Softwareentwicklung ---
-        Course swe = createCourse(secondUser, "Softwareentwicklung");
+        // --- Firdes: Softwareentwicklung ---
+        Course swe = createCourse(firdes, "Softwareentwicklung");
 
         StudyDocument sweVo1 = createDocument(swe, "SWE_VO01_OOP.pdf",
                 "Objektorientierte Programmierung baut auf Klassen und Objekten auf. Wichtige Prinzipien sind "
@@ -83,9 +85,38 @@ public class DataInitializer implements CommandLineRunner {
                 "Der innere Zustand eines Objekts kann nur über definierte Methoden verändert werden.");
         createFlashcard(sweVo1, "Nenne die drei zentralen Prinzipien der OOP.", "Kapselung, Vererbung und Polymorphie");
 
+        // --- Selina: DevOps und Cloud Computing ---
+        Course devops = createCourse(selina, "DevOps und Cloud Computing");
+
+        StudyDocument devopsVo1 = createDocument(devops, "DEVOPS_VO01_Container.pdf",
+                "Container verpacken eine Anwendung mit allen Abhängigkeiten in eine isolierte Einheit. "
+                        + "Docker ist das bekannteste Werkzeug dafür. Ein Image ist die Vorlage, ein Container die "
+                        + "laufende Instanz eines Images. Mit Docker Compose lassen sich mehrere Container gemeinsam starten.");
+        createSummary(devopsVo1, "Container bündeln eine Anwendung mit ihren Abhängigkeiten. Aus einem Image entsteht "
+                + "ein laufender Container, mehrere Container lassen sich mit Docker Compose gemeinsam starten.");
+        createFlashcard(devopsVo1, "Was ist der Unterschied zwischen Image und Container?",
+                "Ein Image ist die Vorlage, ein Container ist die laufende Instanz eines Images.");
+        createFlashcard(devopsVo1, "Wofür wird Docker Compose verwendet?",
+                "Um mehrere Container gemeinsam zu beschreiben und zu starten.");
+
+        // --- Elisabeth: Advanced Business Engineering ---
+        Course abe = createCourse(elisabeth, "Advanced Business Engineering");
+
+        StudyDocument abeVo1 = createDocument(abe, "ABE_VO01_BPMN.pdf",
+                "BPMN (Business Process Model and Notation) ist ein Standard zur grafischen Modellierung von "
+                        + "Geschäftsprozessen. Die wichtigsten Elemente sind Ereignisse, Aktivitäten, Gateways und "
+                        + "Sequenzflüsse. Pools und Lanes zeigen, welche Organisation oder Rolle eine Aufgabe übernimmt.");
+        createSummary(abeVo1, "BPMN ist der Standard zur Modellierung von Geschäftsprozessen. Prozesse bestehen aus "
+                + "Ereignissen, Aktivitäten, Gateways und Sequenzflüssen, Pools und Lanes ordnen Aufgaben Rollen zu.");
+        createFlashcard(abeVo1, "Wofür steht BPMN?", "Business Process Model and Notation");
+        createFlashcard(abeVo1, "Wozu dienen Pools und Lanes in BPMN?",
+                "Sie zeigen, welche Organisation oder Rolle eine Aufgabe übernimmt.");
+
         courseRepository.save(dwh);
         courseRepository.save(se);
         courseRepository.save(swe);
+        courseRepository.save(devops);
+        courseRepository.save(abe);
     }
 
     private User getOrCreateUser(String username) {
