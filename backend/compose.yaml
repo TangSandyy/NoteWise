@@ -14,5 +14,19 @@ services:
       # damit Spring Boot das pgvector-Image als PostgreSQL erkennt
       org.springframework.boot.service-connection: postgres
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.8.2
+    container_name: notewise-keycloak
+    # start-dev: Entwicklungsmodus (HTTP, kein Zertifikat nötig)
+    # --import-realm: liest beim Start die Realm-Datei aus keycloak/ ein
+    command: start-dev --import-realm
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    ports:
+      - "8180:8080"
+    volumes:
+      - ./keycloak/notewise-realm.json:/opt/keycloak/data/import/notewise-realm.json:ro
+
 volumes:
   notewise-db-data:
